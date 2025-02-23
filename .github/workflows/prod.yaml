@@ -1,0 +1,45 @@
+name: Deploy PROD
+
+on:
+  push:
+    branches: master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20.x'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build project
+      run: npm run build
+
+    - name: Clean up node_modules
+      run: rm -r node_modules/
+
+    - name: Install production dependencies
+      run: npm ci --only=prod
+
+    - name: Zip files
+      run: zip -r lambda.zip . -x "*.git*" "node_modules/aws-sdk/*"
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+
+    - name: Deploy to AWS Lambda
+      run: |
+        aws lambda update-function-code --function-name dari-cinema-mngr --zip-file fileb://lambda.zip
+        aws lambda update-function-configuration --function-name dari-cinema-mngr --handler index.handler --runtime nodejs20.x --memory-size 256 --timeout 30
