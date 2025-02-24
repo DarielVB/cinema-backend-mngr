@@ -1,57 +1,69 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
-import { Showtimes } from '../showtimes/showtimes.model';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Showtime } from '../showtimes/showtimes.model';
+import { IReservation } from './reservation.interface';
 
 @Table({
   tableName: 'reservations',
-  timestamps: false,
+  timestamps: false
 })
-export class Reservation extends Model {
+export class Reservation extends Model<IReservation> implements IReservation {
   @Column({
     allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: DataType.INTEGER,
+  })
+  public id!: number;
+
+  @Column({
     type: DataType.DECIMAL(10, 0),
+    allowNull: false
   })
   public cc!: number;
 
   @Column({
-    allowNull: false,
     type: DataType.STRING,
+    allowNull: false
   })
   public name!: string;
 
   @Column({
-    allowNull: false,
     type: DataType.STRING,
+    allowNull: false
   })
   public email!: string;
 
-  @ForeignKey(() => Showtimes)
+  @ForeignKey(() => Showtime)
   @Column({
-    allowNull: false,
-    field: 'showtime_id',
     type: DataType.INTEGER,
+    allowNull: false,
+    field: 'showtime_id'
   })
   public showtimeId!: number;
 
   @Column({
-    allowNull: false,
     type: DataType.CHAR(3),
+    allowNull: false,
+    unique: true, // Asegurar unicidad
+    field: 'seat_code'
   })
   public seatCode!: string;
 
   @Column({
-    allowNull: false,
     type: DataType.DATE,
-    defaultValue: DataType.NOW,
+    allowNull: true,
+    field: 'reservation_time',
+    defaultValue: DataType.NOW
   })
-  public reservationTime!: Date;
+  public reservationTime?: Date;
 
   @Column({
-    allowNull: false,
     type: DataType.BOOLEAN,
-    defaultValue: false,
+    allowNull: false,
+    defaultValue: false
   })
   public taken!: boolean;
 
-  @BelongsTo(() => Showtimes)
-  public showtime!: Showtimes;
+  @BelongsTo(() => Showtime)
+  public showtime!: Showtime;
 }

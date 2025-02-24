@@ -1,25 +1,34 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Table, Column, Model, DataType } from 'sequelize-typescript';
 
 @Table({
   tableName: 'rooms',
-  timestamps: false,
+  timestamps: false
 })
 export class Room extends Model {
   @Column({
     allowNull: false,
-    type: DataType.STRING(100),
+    autoIncrement: true,
+    primaryKey: true,
+    type: DataType.INTEGER,
+  })
+  public id!: number;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false
   })
   public name!: string;
 
   @Column({
-    allowNull: false,
     type: DataType.INTEGER,
+    allowNull: false
   })
   public capacity!: number;
 
   @Column({
+    type: DataType.CHAR,
     allowNull: false,
-    type: DataType.CHAR(1),
+    field: 'max_row'
   })
   public maxRow!: string;
 }

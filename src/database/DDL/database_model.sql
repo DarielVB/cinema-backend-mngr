@@ -44,8 +44,8 @@ CREATE TABLE reservations (
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     showtime_id INT NOT NULL,
-    seat_code CHAR(3) NOT NULL,
+    seat_code CHAR(3) NOT NULL UNIQUE,
     reservation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     taken BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (showtime_id) REFERENCES Showtimes(id),
+    FOREIGN KEY (showtime_id) REFERENCES showtimes(id)
 );
