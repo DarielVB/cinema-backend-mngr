@@ -26,7 +26,7 @@ describe('Movies controller', () => {
   it('GIVEN that I want to call the get movies api WHEN I do the call THEN it must return the list of movies', (done) => {
     MockMovies.getMoviesSuccess(sandbox);
     request(app)
-      .get('/getMovies')
+      .get('/dev/getMovies')
       .end((err, res) => {
         if (err) done(err);
         expect(res).to.have.status(200);
