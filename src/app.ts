@@ -8,6 +8,7 @@ app.use(express.json());
 app.get(
     '/',
     (req, res) => {
+        console.log('Hello World!', req.path);
         res.send('Hello World!');
     }
 );
