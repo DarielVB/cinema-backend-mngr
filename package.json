@@ -4,7 +4,8 @@
   "description": "mngr del DariCinema",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build": "tsc" 
   },
   "keywords": [],
   "author": "",
