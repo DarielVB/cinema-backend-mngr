@@ -5,17 +5,13 @@ const app = express();
 
 app.use(express.json());
 
-app.get(
-    '/',
-    (req, res) => {
-        console.log('Hello World!', req.path);
-        res.send('Hello World!');
-    }
-);
-
 app.use(
     '/dev',
     movieController
 );
+
+app.all('*', (req, res) => {
+    res.status(404).send('Not Found');
+});
 
 export default app;
