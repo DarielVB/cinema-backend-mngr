@@ -14,3 +14,19 @@ Creo mis carpetas
 / src / controllers
 / src / services
 / src / repositories
+
+
+Para hacer uso de las apis por favor usar el siguiente link (temporal, lo cerrare despues de la kata)
+
+https://jql7ljlyg1.execute-api.us-east-2.amazonaws.com/dev/dev
+
+los siguientes paths son los que se pueden usar
+- /getMovies
+- /createMovie
+- /getRooms
+- /createRoom
+- /getShowtimes
+- /createShowtime
+- /getReservations
+- /getReservationsByShowTimeId/:showTimeId
+- /createReservation
