@@ -18,4 +18,4 @@ export const sequelizePostgreSQL = new Sequelize({
     repositoryMode: true,
     username: 'postgres',
     logging: true,
-})
+});
