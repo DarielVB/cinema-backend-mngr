@@ -1,10 +1,11 @@
+import config from "../config";
 import { IReservation } from "../model/reservations/reservations.interface";
 import ReservationRepository from "../repositories/reservation.repository";
 import AWS from 'aws-sdk';
 
 AWS.config.update({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: config.AWS_ACCESS_KEY_ID_lambda,
+    secretAccessKey: config.AWS_SECRET_ACCESS_KEY_lambda,
     region: 'us-east-2'
 });
 
