@@ -44,7 +44,7 @@ export class Reservation extends Model implements IReservation {
   @Column({
     type: DataType.CHAR(3),
     allowNull: false,
-    unique: true, // Asegurar unicidad
+    unique: true,
     field: 'seat_code'
   })
   public seatCode!: string;

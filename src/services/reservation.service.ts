@@ -51,7 +51,7 @@ export default class ReservationService {
                     Data: 'Reservation Confirmation'
                 }
             },
-            Source: 'darielvb8520@outlook.com', 
+            Source: 'darielvb8520@outlook.com',
         };
 
         try {
