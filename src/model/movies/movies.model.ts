@@ -1,6 +1,7 @@
-import 'reflect-metadata';
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo, BelongsToMany } from 'sequelize-typescript';
 import { Classification } from '../classification/classification.model';
+import { Genre } from '../genre/genre.model';
+import { MovieGenre } from '../movieGenre/movieGenre.model';
 import { IMovie } from './movies.interface';
 
 @Table({
@@ -38,4 +39,7 @@ export class Movie extends Model implements IMovie {
 
   @BelongsTo(() => Classification)
   public classification!: Classification;
+
+  @BelongsToMany(() => Genre, () => MovieGenre)
+  public genres!: Genre[];
 }
