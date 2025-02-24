@@ -1,12 +1,19 @@
 import { sequelizePostgreSQL } from "../database/database";
 import { IMovie } from "../model/movies/movies.interface";
 import { Movie } from "../model/movies/movies.model";
+import { Genre } from "../model/genre/genre.model";
 
 export const movieRepository = sequelizePostgreSQL.getRepository(Movie);
 
 const getMovies = async () => {
     console.log('Trying to get movies');
-    return await movieRepository.findAll();
+    return await movieRepository.findAll({
+        include: [{
+            model: Genre,
+            attributes: ['name'],
+            through: { attributes: [] }
+        }]
+    });
 }
 
 const createMovie = async (movie: IMovie) => {
@@ -21,7 +28,7 @@ const createMovie = async (movie: IMovie) => {
 
 const MovieRepository = {
     getMovies,
-    createMovie,
+    createMovie
 }
 
 export default MovieRepository;
