@@ -1,5 +1,7 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, BelongsToMany } from 'sequelize-typescript';
 import { IGenre } from './genre.interface';
+import { Movie } from '../movies/movies.model';
+import { MovieGenre } from '../movieGenre/movieGenre.model';
 
 @Table({
   tableName: 'genre',
@@ -20,4 +22,7 @@ export class Genre extends Model implements IGenre {
     unique: true
   })
   public name!: string;
+
+  @BelongsToMany(() => Movie, () => MovieGenre)
+  public movies!: Movie[];
 }

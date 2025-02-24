@@ -4,12 +4,13 @@ import { Movie } from "../model/movies/movies.model";
 import { Genre } from "../model/genre/genre.model";
 
 export const movieRepository = sequelizePostgreSQL.getRepository(Movie);
+export const genreRepository = sequelizePostgreSQL.getRepository(Genre);
 
 const getMovies = async () => {
     console.log('Trying to get movies');
     return await movieRepository.findAll({
         include: [{
-            model: Genre,
+            model: genreRepository,
             attributes: ['name'],
             through: { attributes: [] }
         }]

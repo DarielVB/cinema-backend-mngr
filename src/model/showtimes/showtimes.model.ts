@@ -1,32 +1,40 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Movie } from '../movies/movies.model';
 import { Room } from '../room/room.model';
+import { IShowtime } from './showtime.interface';
 
 @Table({
   tableName: 'showtimes',
-  timestamps: false,
+  timestamps: false
 })
-export class Showtimes extends Model {
-  @ForeignKey(() => Movie)
+export class Showtime extends Model implements IShowtime{
   @Column({
     allowNull: false,
-    field: 'movie_id',
+    autoIncrement: true,
+    primaryKey: true,
     type: DataType.INTEGER,
+  })
+  public id!: number;
+
+  @ForeignKey(() => Movie)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    field: 'movie_id'
   })
   public movieId!: number;
 
   @ForeignKey(() => Room)
   @Column({
-    allowNull: false,
-    field: 'room_id',
     type: DataType.INTEGER,
+    allowNull: false,
+    field: 'room_id'
   })
   public roomId!: number;
 
   @Column({
-    allowNull: false,
-    field: 'showtime',
     type: DataType.DATE,
+    allowNull: false
   })
   public showtime!: Date;
 
