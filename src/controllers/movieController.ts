@@ -3,7 +3,7 @@ import MovieService from "../services/movie.service";
 
 const movieController = Router();
 
-movieController.get("/getMovies", async (req, res) => {
+movieController.get('/getMovies', async (req, res) => {
   try {
     const movies = await MovieService.getMovies();
     res.status(200).json({ message: "Get movies", data: movies });
