@@ -14,7 +14,7 @@ export const sequelizePostgreSQL = new Sequelize({
     ],
     password: config.DB_PASSWORD,
     pool: { max: 5, min: 0, acquire: 30000, idle: 10000 },
-    port: 5432,
+    port: +5432,
     repositoryMode: true,
     username: 'postgres',
     logging: true,

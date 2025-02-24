@@ -31,7 +31,8 @@ export class Movie extends Model implements IMovie {
   @ForeignKey(() => Classification)
   @Column({
     type: DataType.INTEGER,
-    allowNull: false
+    allowNull: false,
+    field: 'classification_id'
   })
   public classificationId!: number;
 
