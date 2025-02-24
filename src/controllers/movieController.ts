@@ -15,12 +15,13 @@ movieController.get('/getMovies', async (req, res) => {
 
 movieController.post('/createMovie', async (req, res) => {
   try {
+    console.log('creating movie');
     const body: IMovie = req.body;
     const movie = await MovieService.createMovie(body);
     res.status(200).json({ message: "Create movie", data: movie });
   } catch (error) {
     res.status(500).json({ message: "Error creating movie", error: error });
   }
-}
+});
 
 export default movieController;
