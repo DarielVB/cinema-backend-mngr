@@ -1,29 +1,37 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import 'reflect-metadata';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Classification } from '../classification/classification.model';
+import { IMovie } from './movies.interface';
 
 @Table({
   tableName: 'movies',
-  timestamps: false,
+  timestamps: false
 })
-export class Movie extends Model {
+export class Movie extends Model implements IMovie {
   @Column({
     allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: DataType.INTEGER,
+  })
+  public id!: number;
+
+  @Column({
     type: DataType.STRING,
-    unique: true,
+    allowNull: false
   })
   public name!: string;
 
   @Column({
-    allowNull: true,
     type: DataType.INTEGER,
+    allowNull: false
   })
   public duration!: number;
 
   @ForeignKey(() => Classification)
   @Column({
-    allowNull: false,
-    field: 'classification_id',
     type: DataType.INTEGER,
+    allowNull: false
   })
   public classificationId!: number;
 
