@@ -39,7 +39,13 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
 
-    - name: Deploy to AWS Lambda
+    - name: Deploy code to AWS Lambda
       run: |
         aws lambda update-function-code --function-name dari-cinema-mngr --zip-file fileb://lambda.zip
+
+    - name: Wait for code update to complete
+      run: sleep 30
+
+    - name: Update function configuration
+      run: |
         aws lambda update-function-configuration --function-name dari-cinema-mngr --handler index.handler --runtime nodejs20.x --memory-size 256 --timeout 30
