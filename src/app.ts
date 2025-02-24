@@ -2,6 +2,7 @@ import express from 'express';
 import movieController from './controllers/movieController';
 import roomController from './controllers/roomController';
 import showtimesController from './controllers/showtimes.controller';
+import reservationController from './controllers/reservationController';
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(
     movieController,
     roomController,
     showtimesController,
+    reservationController,
 );
 
 app.all('*', (req, res) => {

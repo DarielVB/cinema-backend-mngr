@@ -6,6 +6,7 @@ import { Genre } from '../model/genre/genre.model';
 import { MovieGenre } from '../model/movieGenre/movieGenre.model';
 import { Room } from '../model/room/room.model';
 import { Showtime } from '../model/showtimes/showtimes.model';
+import { Reservation } from '../model/reservations/reservations.model';
 
 export const sequelizePostgreSQL = new Sequelize({
     database: config.DB_NAME,
@@ -18,7 +19,8 @@ export const sequelizePostgreSQL = new Sequelize({
         Genre,
         MovieGenre,
         Room,
-        Showtime
+        Showtime,
+        Reservation
     ],
     password: config.DB_PASSWORD,
     pool: { max: 5, min: 0, acquire: 30000, idle: 10000 },

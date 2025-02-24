@@ -1,12 +1,12 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Showtime } from '../showtimes/showtimes.model';
-import { IReservation } from './reservation.interface';
+import { IReservation } from './reservations.interface';
 
 @Table({
   tableName: 'reservations',
   timestamps: false
 })
-export class Reservation extends Model<IReservation> implements IReservation {
+export class Reservation extends Model implements IReservation {
   @Column({
     allowNull: false,
     autoIncrement: true,
