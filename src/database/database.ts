@@ -6,7 +6,7 @@ import { Classification } from '../model/classification/classification.model';
 export const sequelizePostgreSQL = new Sequelize({
     database: config.DB_NAME,
     dialect: 'postgres',
-    dialectOptions: { connectTimeout: 1000 },
+    dialectOptions: { connectTimeout: 29000 },
     host: config.DB_HOST,
     models: [
         Movie,
