@@ -7,7 +7,7 @@ import { IMovieGenre } from './movieGenre.interface';
   tableName: 'movie_genres',
   timestamps: false
 })
-export class MovieGenre extends Model implements IMovieGenre{
+export class MovieGenre extends Model implements IMovieGenre {
   @Column({
     allowNull: false,
     autoIncrement: true,
